@@ -1,0 +1,85 @@
+import { stringify } from 'qs';
+import request from '../utils/request';
+import config from '../config'
+
+export async function totalUserCount(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { totalUsersCount(dateTime: "${params.dateTime}" dayStart: "${params.dayStart}" dayEnd: "${params.dayEnd}") {day total}}`}
+  }); 
+}
+export async function totalPostCount(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { totalPostsCount(dateTime: "${params.dateTime}" dayStart: "${params.dayStart}" dayEnd: "${params.dayEnd}") {day total}}`}
+  }); 
+}
+export async function totalCommentCount(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { totalCommentsCount(dateTime: "${params.dateTime}" dayStart: "${params.dayStart}" dayEnd: "${params.dayEnd}") {day total}}`}
+  }); 
+}
+export async function usersGrowthData(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { userGrowth(dateType: "${params.dateType}" createdAfter: "${params.rangePickerValue[0].toISOString()}" createdBefore: "${params.rangePickerValue[1].toISOString()}") {beforeCount analysis{_id count}}}`}
+  });
+}
+export async function postsGrowthData(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { postGrowth(dateType: "${params.dateType}" createdAfter: "${params.rangePickerValue[0].toISOString()}" createdBefore: "${params.rangePickerValue[1].toISOString()}") {beforeCount analysis{_id count}}}`}
+  });
+}
+export async function commentsGrowthData(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { commentGrowth(dateType: "${params.dateType}" createdAfter: "${params.rangePickerValue[0].toISOString()}" createdBefore: "${params.rangePickerValue[1].toISOString()}") {beforeCount analysis{_id count}}}`}
+  });
+}
+export async function hotUsersData(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { hotUsers {_id postCount commentCount rank}}`}
+  });
+}
+export async function hotPostsData(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author}}`}
+  });
+}
+
