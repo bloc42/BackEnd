@@ -1,4 +1,3 @@
-import { stringify } from 'qs';
 import request from '../utils/request';
 import config from '../config'
 
@@ -83,3 +82,25 @@ export async function hotPostsData(params) {
   });
 }
 
+export async function fakeSubmitForm(params) {
+  return request('/api/forms', {
+    method: 'POST',
+    body: params,
+  });
+}
+
+export async function fakeAccountLogin(params) {
+  return request('/api/login/account', {
+    method: 'POST',
+    body: params,
+  });
+}
+
+
+export async function queryBasicProfile() {
+  return request('/api/profile/basic');
+}
+
+export async function queryAdvancedProfile() {
+  return request('/api/profile/advanced');
+}

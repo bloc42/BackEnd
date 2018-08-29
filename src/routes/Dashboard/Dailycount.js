@@ -43,9 +43,6 @@ export default class Analysis extends Component {
     const dayStart = new Date(today - 1000 * 60 * 60 * 24).toISOString();
     const dayEnd = new Date(today - 1).toISOString();
     dispatch({
-      type: 'chart/fetch',
-    });
-    dispatch({
       type: 'chart/fetchHotPostsData',
       payload: {
         'sort': 'comment'
