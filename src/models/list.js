@@ -1,10 +1,11 @@
-import { queryFakeList } from '../services/api';
-
+import { queryFakeList, usersListData} from '../services/api';
+import {formatForUserList } from '../utils/dataformat'
 export default {
   namespace: 'list',
 
   state: {
-    list: [],
+    userlist: [],
+    cursor: ""
   },
 
   effects: {
@@ -14,6 +15,16 @@ export default {
         type: 'queryList',
         payload: Array.isArray(response) ? response : [],
       });
+    },
+    *fetchUsersList({ payload }, { call, put }){
+      const response = yield call(usersListData, payload);
+      yield put({
+        type: 'save',
+        payload: {
+          userlist: formatForUserList(response['data']['userList']['userlist']),
+          cursor:response['data']['userList']['cursor']
+        },
+      }); 
     },
     *appendFetch({ payload }, { call, put }) {
       const response = yield call(queryFakeList, payload);
@@ -25,6 +36,12 @@ export default {
   },
 
   reducers: {
+    save(state, { payload }) {
+      return {
+        ...state,
+        ...payload,
+      };
+    },
     queryList(state, action) {
       return {
         ...state,

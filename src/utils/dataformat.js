@@ -88,3 +88,19 @@ export function formatForHotPostTable(data){
     })
     return result.slice(0,10)
 }
+
+export function formatForUserList(data){
+    let result=[]
+    data.forEach(function(val,key){
+        result.push({
+            index: key+1,
+            user: val["user"],
+            id: val["id"],
+            email: val["email"],
+            postcount: val["postCount"],
+            commentcount: val["commentCount"],
+            rank: val["rank"],
+          })
+    })
+    return result
+}

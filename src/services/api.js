@@ -104,3 +104,14 @@ export async function queryBasicProfile() {
 export async function queryAdvancedProfile() {
   return request('/api/profile/advanced');
 }
+
+export async function usersListData(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { userList(cursor:"${params.cursor}",limit:${params.limit}) {cursor userlist {_id user email postCount commentCount rank}}}`}
+  });
+}
