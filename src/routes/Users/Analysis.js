@@ -27,8 +27,8 @@ const { RangePicker } = DatePicker;
 export default class Analysis extends Component {
   state = {
     currentTabKey: 'bartab',
-    rangePickerValue: getTimeDistance('today'),
-    dateType: 'today'
+    rangePickerValue: getTimeDistance('week'),
+    dateType: 'week'
   };
 
   componentDidMount() {
@@ -80,6 +80,7 @@ export default class Analysis extends Component {
 
   selectDate = type => {
     const nowvalue = getTimeDistance(type)
+    console.error(nowvalue)
     this.setState({
       dateType: type,
       rangePickerValue: nowvalue,
@@ -126,9 +127,6 @@ export default class Analysis extends Component {
     const salesExtra = (
       <div className={styles.salesExtraWrap}>
         <div className={styles.salesExtra}>
-          <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
-            今日
-          </a>
           <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
             本周
           </a>

@@ -42,6 +42,12 @@ export default {
         ...payload,
       };
     },
+    clear() {
+      return {
+        userlist: [],
+        cursor: ""
+      }
+    },
     queryList(state, action) {
       return {
         ...state,

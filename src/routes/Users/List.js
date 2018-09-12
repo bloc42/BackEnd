@@ -30,11 +30,7 @@ export default class List extends Component {
   componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'list/fetchUsersList',
-      payload: {
-        cursor,
-        limit
-      }
+      type: 'list/clear'
     });
   }
 

@@ -1,39 +1,38 @@
 export function formatForDate(type,params){
     const data = params.analysis
     let tagCount = params.beforeCount
-    if(type == 'today'){
+    if(type == 'week'){
         let result = []
-        for (let i = 1; i <= 24; i++) {
+        const now = new Date()
+        now.setHours(0)
+        now.setMinutes(0)
+        now.setSeconds(0)
+
+        const lastday = new Date(now.getTime()-1000)
+        const day = lastday.getDay()
+        for(let i =day-6;i<=day;i++){
+            const flag=i;
+            if(i<=0){flag=i+7}
             for (let j = 0; j < data.length; j++) {
-                if(parseInt(data[j]['_id'])+1 == i){
+                if(parseInt(data[j]['_id']) == flag){
                     const nowcount = parseInt(data[j]['count'])
                     tagCount = nowcount+tagCount
                     break
                 }
             }
-            result.push({"x":i.toString() ,"y":tagCount})
-        }
-        return result
-    }else if(type == 'week'){
-        let result = []
-        for (let i = 0; i < 7; i++) {
-            for (let j = 0; j < data.length; j++) {
-                if(parseInt(data[j]['_id']) == i){
-                    const nowcount = parseInt(data[j]['count'])
-                    tagCount = nowcount+tagCount
-                    break
-                }
-            }
-            if(i==0){
-                result.push({"x":'周日' ,"y":tagCount})
-            }else{
-                result.push({"x":'周'+i ,"y":tagCount})
-            }
+            result.push({"x":'周'+flag ,"y":tagCount})        
         }
         return result      
     }else if(type == 'month'){
         let result = []
-        for (let i = 1; i <= 31; i++) {
+        const now = new Date()
+        now.setHours(0)
+        now.setMinutes(0)
+        now.setSeconds(0)
+        const lastday = new Date(now.getTime()-1000)
+        const day = lastday.getDate()
+
+        for (let i = 1; i <= day; i++) {
             for (let j = 0; j < data.length; j++) {
                 if(parseInt(data[j]['_id']) == i){
                     const nowcount = parseInt(data[j]['count'])
@@ -46,7 +45,14 @@ export function formatForDate(type,params){
         return result      
     }else if(type == 'year'){
         let result = []
-        for (let i = 1; i <= 12; i++) {
+        const now = new Date()
+        now.setHours(0)
+        now.setMinutes(0)
+        now.setSeconds(0)
+        const lastday = new Date(now.getTime()-1000)
+        const month = lastday.getMonth()
+
+        for (let i = 1; i <= month+1; i++) {
             for (let j = 0; j < data.length; j++) {
                 if(parseInt(data[j]['_id']) == i){
                     const nowcount = parseInt(data[j]['count'])
