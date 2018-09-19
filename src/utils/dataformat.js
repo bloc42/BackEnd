@@ -14,7 +14,13 @@ export function formatForDate(type,params){
             const flag=i;
             if(i<=0){flag=i+7}
             for (let j = 0; j < data.length; j++) {
-                if(parseInt(data[j]['_id']) == flag){
+                let tagDay = parseInt(data[j]['_id'])
+                if(tagDay==1){
+                    tagDay=tagDay+6
+                }else{
+                    tagDay=tagDay-1
+                }
+                if(tagDay == flag){
                     const nowcount = parseInt(data[j]['count'])
                     tagCount = nowcount+tagCount
                     break
