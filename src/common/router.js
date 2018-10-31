@@ -106,6 +106,9 @@ export const getRouterData = app => {
     '/posts/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Posts/Analysis')),
     },
+    '/posts/list': {
+      component: dynamicWrapper(app, ['list'], () => import('../routes/Posts/List')),
+    },
     '/comments/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Comments/Analysis')),
     },

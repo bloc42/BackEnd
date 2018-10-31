@@ -1,5 +1,5 @@
-import { queryFakeList, usersListData} from '../services/api';
-import {formatForUserList } from '../utils/dataformat'
+import { queryFakeList, usersListData, hotPostsData} from '../services/api';
+import {formatForUserList,formatForHotPostList } from '../utils/dataformat'
 export default {
   namespace: 'list',
 
@@ -23,6 +23,15 @@ export default {
         payload: {
           userlist: formatForUserList(response['data']['userList']['userlist']),
           cursor:response['data']['userList']['cursor']
+        },
+      }); 
+    },
+    *fetchPostsList({ payload }, { call, put }){
+      const response = yield call(hotPostsData, payload);
+      yield put({
+        type: 'save',
+        payload: {
+          postlist: formatForHotPostList(response['data']['hotPosts']),
         },
       }); 
     },

@@ -8,8 +8,7 @@ import {
   DatePicker,
 } from 'antd';
 import {
-  Bar,
-  TimelineChart,
+  Bar
 } from 'components/Charts';
 import { getTimeDistance } from '../../utils/utils';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';

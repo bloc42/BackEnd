@@ -78,7 +78,7 @@ export async function hotPostsData(params) {
     body: {
             "variables":{
             },
-            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author}}`}
+            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author createdAt}}`}
   });
 }
 
@@ -113,5 +113,15 @@ export async function usersListData(params) {
             "variables":{
             },
             "query":`query { userList(cursor:"${params.cursor}",limit:${params.limit}) {cursor userlist {_id user email postCount commentCount rank}}}`}
+  });
+}
+export async function postsListData(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author createdAt}}`}
   });
 }

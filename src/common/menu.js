@@ -35,6 +35,10 @@ const menuData = [
       {
         name: '帖子分析',
         path: 'analysis'
+      },
+      {
+        name: '帖子列表',
+        path: 'list'
       }
     ],
   },

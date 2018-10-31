@@ -116,3 +116,19 @@ export function formatForUserList(data){
     })
     return result
 }
+export function formatForHotPostList(data){
+    let result=[]
+    data.forEach(function(val,key){
+        result.push({
+            index: key+1,
+            id: val["_id"],
+            post: val["title"],
+            commentcount: val["commentCount"],
+            clickcount: val["clickCount"],
+            author: val["author"],
+            createdAt: (new Date(val["createdAt"])).toLocaleString()
+          })
+    })
+    return result
+}
+
