@@ -112,9 +112,14 @@ export default class List extends Component {
         {
           title: '发帖人',
           dataIndex: 'author',
-          key: 'author',
-          align: 'right',
+          key: 'author'
         },
+        {
+            title: '最后读者',
+            dataIndex: 'lastReader',
+            key: 'lastReader',
+            align: 'right',
+          }
       ];
     return (
       <PageHeaderLayout title="帖子列表">

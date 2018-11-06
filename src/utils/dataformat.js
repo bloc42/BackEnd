@@ -126,6 +126,7 @@ export function formatForHotPostList(data){
             commentcount: val["commentCount"],
             clickcount: val["clickCount"],
             author: val["author"],
+            lastReader: val["lastReader"]?val["lastReader"]:"游客",
             createdAt: (new Date(val["createdAt"])).toLocaleString()
           })
     })

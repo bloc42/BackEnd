@@ -78,7 +78,7 @@ export async function hotPostsData(params) {
     body: {
             "variables":{
             },
-            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author createdAt}}`}
+            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author createdAt lastReader}}`}
   });
 }
 
@@ -122,6 +122,6 @@ export async function postsListData(params) {
     body: {
             "variables":{
             },
-            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author createdAt}}`}
+            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author createdAt lastReader}}`}
   });
 }
