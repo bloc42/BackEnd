@@ -89,13 +89,22 @@ export async function fakeSubmitForm(params) {
   });
 }
 
+// export async function fakeAccountLogin(params) {
+//   return request('/api/login/account', {
+//     method: 'POST',
+//     body: params,
+//   });
+// }
 export async function fakeAccountLogin(params) {
-  return request('/api/login/account', {
+  return request(config.graphql,{
     method: 'POST',
-    body: params,
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`mutation { login(username:"${params.username}",password:"${ params.password}") {id username email}}`}
   });
 }
-
 
 export async function queryBasicProfile() {
   return request('/api/profile/basic');

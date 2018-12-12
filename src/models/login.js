@@ -14,29 +14,56 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
+      // console.error(payload)
       const response = yield call(fakeAccountLogin, payload);
-      yield put({
-        type: 'changeLoginStatus',
-        payload: response,
-      });
+      if(response.data.login && response.data.login.id !==""){
+        const res ={
+          currentAuthority: "user",
+          status:"ok",
+          type:"account"
+        }
+        yield put({
+          type: 'changeLoginStatus',
+          payload: res,
+        });
+      }
+      
+      // yield put({
+      //   type: 'changeLoginStatus',
+      //   payload: response,
+      // });
       // Login successfully
-      if (response.status === 'ok') {
+       if (response.data.login && response.data.login.id !=="") {
+      // if(res.data.login.id !== ""){
+        // const response={
+        //   status: 'ok',
+        //   currentAuthority: res.data.login.username,
+        // }
+        // yield put({
+        //   type: 'changeLoginStatus',
+        //   payload: response,
+        // });
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
         if (redirect) {
+          console.error("1"+redirect)
           const redirectUrlParams = new URL(redirect);
+          console.error("2"+redirectUrlParams)
           if (redirectUrlParams.origin === urlParams.origin) {
             redirect = redirect.substr(urlParams.origin.length);
             if (redirect.startsWith('/#')) {
               redirect = redirect.substr(2);
             }
           } else {
+            console.error("3"+redirect)
             window.location.href = redirect;
             return;
           }
         }
+        console.error("4"+routerRedux)
+        console.error("5"+redirect)
         yield put(routerRedux.replace(redirect || '/'));
       }
     },
