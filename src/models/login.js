@@ -42,9 +42,9 @@ export default {
        if (response.data.login && response.data.login.id !=="") {
         reloadAuthorized();
         if(response.data.login.username == "admin"){
-          window.location.href = window.location.href + "?redirect=http%3A%2F%2Flocalhost%3A8000%2F%23%2Fdashboard%2Fdailycount"
+          window.location.href = window.location.href + "?redirect="+window.location.host+"%2F%23%2Fdashboard%2Fdailycount"
         }else{
-          window.location.href = window.location.href + "?redirect=http%3A%2F%2Flocalhost%3A8000%2F%23%2Fchannel"
+          window.location.href = window.location.href + "?redirect="+window.location.host+"%2F%23%2Fchannel"
         }
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
