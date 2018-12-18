@@ -78,7 +78,7 @@ export async function hotPostsData(params) {
     body: {
             "variables":{
             },
-            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author createdAt lastReader}}`}
+            "query":`query { hotPosts(sort: "${params.sort}",channel:"${params.channel}") {_id title commentCount clickCount author createdAt lastReader}}`}
   });
 }
 
@@ -121,7 +121,7 @@ export async function usersListData(params) {
     body: {
             "variables":{
             },
-            "query":`query { userList(cursor:"${params.cursor}",limit:${params.limit}) {cursor userlist {_id user email postCount commentCount rank}}}`}
+            "query":`query { userList(cursor:"${params.cursor}",limit:${params.limit},channel:"${params.channel}") {cursor userlist {_id user email postCount commentCount rank}}}`}
   });
 }
 export async function postsListData(params) {
@@ -131,6 +131,17 @@ export async function postsListData(params) {
     body: {
             "variables":{
             },
-            "query":`query { hotPosts(sort: "${params.sort}") {_id title commentCount clickCount author createdAt lastReader}}`}
+            "query":`query { hotPosts(sort: "${params.sort}",channel:"${params.channel}") {_id title commentCount clickCount author createdAt lastReader}}`}
+  });
+}
+
+export async function queryChannel(params) {
+  return request(config.graphql,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json','Accept': '*/*'},
+    body: {
+            "variables":{
+            },
+            "query":`query { ownChannels(creator:"${params.payload.creator}") {name creator}}`}
   });
 }

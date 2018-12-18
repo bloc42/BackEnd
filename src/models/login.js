@@ -17,53 +17,50 @@ export default {
       // console.error(payload)
       const response = yield call(fakeAccountLogin, payload);
       if(response.data.login && response.data.login.id !==""){
-        const res ={
-          currentAuthority: "user",
-          status:"ok",
-          type:"account"
+        var res={}
+        localStorage.setItem('username', response.data.login.username)
+        if(response.data.login.username !== "admin"){
+          res ={
+            currentAuthority: "user",
+            status:"ok",
+            type:"account"
+          }
+        }else{
+          res ={
+            currentAuthority: "admin",
+            status:"ok",
+            type:"account"
+          }
         }
+
         yield put({
           type: 'changeLoginStatus',
           payload: res,
         });
       }
-      
-      // yield put({
-      //   type: 'changeLoginStatus',
-      //   payload: response,
-      // });
       // Login successfully
        if (response.data.login && response.data.login.id !=="") {
-      // if(res.data.login.id !== ""){
-        // const response={
-        //   status: 'ok',
-        //   currentAuthority: res.data.login.username,
-        // }
-        // yield put({
-        //   type: 'changeLoginStatus',
-        //   payload: response,
-        // });
         reloadAuthorized();
+        if(response.data.login.username == "admin"){
+          window.location.href = window.location.href + "?redirect=http%3A%2F%2Flocalhost%3A8000%2F%23%2Fdashboard%2Fdailycount"
+        }else{
+          window.location.href = window.location.href + "?redirect=http%3A%2F%2Flocalhost%3A8000%2F%23%2Fchannel"
+        }
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
         if (redirect) {
-          console.error("1"+redirect)
           const redirectUrlParams = new URL(redirect);
-          console.error("2"+redirectUrlParams)
           if (redirectUrlParams.origin === urlParams.origin) {
             redirect = redirect.substr(urlParams.origin.length);
             if (redirect.startsWith('/#')) {
               redirect = redirect.substr(2);
             }
           } else {
-            console.error("3"+redirect)
             window.location.href = redirect;
             return;
           }
         }
-        console.error("4"+routerRedux)
-        console.error("5"+redirect)
         yield put(routerRedux.replace(redirect || '/'));
       }
     },

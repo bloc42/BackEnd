@@ -88,8 +88,9 @@ enquireScreen(b => {
   isMobile = b;
 });
 
-@connect(({ user, global = {}, loading }) => ({
+@connect(({ user,channels, global = {}, loading }) => ({
   currentUser: user.currentUser,
+  channels:channels,
   collapsed: global.collapsed,
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
@@ -122,6 +123,12 @@ export default class BasicLayout extends React.PureComponent {
     dispatch({
       type: 'user/fetchCurrent',
     });
+    // dispatch({
+    //   type: 'channel/fetch',
+    //   payload: {
+    //     creator: 'summer'
+    //   }
+    // })
   }
 
   componentWillUnmount() {
@@ -205,6 +212,11 @@ export default class BasicLayout extends React.PureComponent {
       });
     }
   };
+  waitrender() {
+    console.log(this.state.channels)
+    console.log(this.props.channels)
+    return  getMenuData()
+  }
 
   render() {
     const {

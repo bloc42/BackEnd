@@ -92,7 +92,7 @@ function findMenuKey(menuData, path) {
 export const getRouterData = app => {
   const routerConfig = {
     '/': {
-      component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
+      component: dynamicWrapper(app, ['user', 'login','channel'], () => import('../layouts/BasicLayout')),
     },
     '/dashboard/dailycount': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Dailycount')),
@@ -131,6 +131,15 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['error'], () =>
         import('../routes/Exception/triggerException')
       ),
+    },
+    '/channel/channel': {
+      component: dynamicWrapper(app, ['channel'], () => import('../routes/Channel/userlist')),
+    },
+    '/channel/*/userlist': {
+      component: dynamicWrapper(app, ['channel'], () => import('../routes/Channel/userlist')),
+    },
+    '/channel/*/postlist': {
+      component: dynamicWrapper(app, ['channel'], () => import('../routes/Channel/postlist')),
     },
   };
   // Get name from ./menu.js or just set it in the router data.

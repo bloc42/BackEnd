@@ -8,6 +8,7 @@ import { getQueryPath } from './utils/utils';
 
 const { ConnectedRouter } = routerRedux;
 const { AuthorizedRoute } = Authorized;
+import {userlist} from "../src/routes/Channel/userlist"
 
 function RouterConfig({ history, app }) {
   const routerData = getRouterData(app);
